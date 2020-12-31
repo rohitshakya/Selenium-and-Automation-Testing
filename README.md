@@ -10,7 +10,19 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 public)  
 2) In build path setup put all the files in class path, not in module path.  
-3) Add selenium server stand alone, client and client source to build path.  
+3) Add selenium server stand alone, client and client source to build path. 
+
+### What to know in selenium
+1) How to setup java, eclipse and selenium drivers
+2) Install webdriver, client driver, IDE
+3) Web Driver Manager
+4) How to run first selenium project
+5) Locate web elements
+6) Katalon recorder
+7) POM
+8) TestNG
+9) Extent Report 
+
 
 ## Steps in selenium projects
 1) Create a java selenium test  

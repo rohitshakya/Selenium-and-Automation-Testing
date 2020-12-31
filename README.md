@@ -11,3 +11,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 public)  
 2) In build path setup put all the files in class path, not in module path.  
 3) Add selenium server stand alone, client and client source to build path.  
+
+## Steps in selenium projects
+1) Create a java selenium test  
+2) Record a test and convert into java selenium test
+3) Install katalon recorder plugin in chrome for recording manual tests  
+4) Install TestNG library and setup and crate a new package for testng programs and tests  

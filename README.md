@@ -23,7 +23,8 @@ public)
 7) POM
 8) TestNG
 9) Extent Report 
-10) Waits
+10) Waits  
+11) Naughty Strings  
 
 ## Different types of testing's that we can achieve through Selenium are:
 

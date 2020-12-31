@@ -26,11 +26,11 @@ public)
 
 ## Different types of testing's that we can achieve through Selenium are:
 
-Functional Testing
-Regression Testing
-Sanity Testing
-Smoke Testing
-Responsive Testing
-Cross Browser Testing
-UI testing (black box)
-Integration Testing
+Functional Testing  
+Regression Testing  
+Sanity Testing  
+Smoke Testing  
+Responsive Testing  
+Cross Browser Testing  
+UI testing (black box)  
+Integration Testing  

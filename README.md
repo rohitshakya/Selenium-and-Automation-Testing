@@ -24,9 +24,13 @@ public)
 9) Extent Report 
 10) Waits
 
+## Different types of testing's that we can achieve through Selenium are:
 
-## Steps in selenium projects
-1) Create a java selenium test  
-2) Record a test and convert into java selenium test
-3) Install katalon recorder plugin in chrome for recording manual tests  
-4) Install TestNG library and setup and crate a new package for testng programs and tests  
+Functional Testing
+Regression Testing
+Sanity Testing
+Smoke Testing
+Responsive Testing
+Cross Browser Testing
+UI testing (black box)
+Integration Testing

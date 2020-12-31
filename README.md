@@ -22,6 +22,7 @@ public)
 7) POM
 8) TestNG
 9) Extent Report 
+10) Waits
 
 
 ## Steps in selenium projects

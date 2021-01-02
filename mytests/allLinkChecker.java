@@ -3,13 +3,14 @@ package testng;
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 import org.testng.annotations.*;
+
 import static org.testng.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class axas {
+public class allLinkChecker {
 	private WebDriver driver;
 	private String baseUrl;
 	private boolean acceptNextAlert = true;
@@ -22,21 +23,30 @@ public class axas {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
-		baseUrl = "https://www.google.com/";
-		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		baseUrl = "https://volt.development.vivadevops.com/\"";
+		driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
 	@Test
 	public void testCase1() throws Exception {
-		driver.get("https://vivadigital.in/");
-		driver.findElement(By.id("books_name")).click();
-		driver.findElement(By.id("books_name")).clear();
-		driver.findElement(By.id("books_name")).sendKeys("hindi");
-		driver.findElement(By.id("books_name")).sendKeys(Keys.ENTER);
-		Thread.sleep(1000);
-		System.out.println("passed");
+		driver.get(baseUrl);
+		// verify if the “Google Search” button is displayed and print the result
+		WebElement homeButtonPresence=driver.findElement(By.xpath("//img[@alt='Viva Volt']"));
+		if (homeButtonPresence.isDisplayed() && homeButtonPresence.isEnabled()) {
+			homeButtonPresence.click();
+			System.out.println("Successfully clicked");
+		}
+		else
+		{
+			System.out.println("not found the home button");
+		}
+		boolean var=isElementPresent(By.xpath("//img[@alt='Viva Volt']"));
+		System.out.println(var);
+		// ERROR: Caught exception [unknown command [editContent]]
 		driver.close();
-	}
+		driver.quit();
+	}	
 
 	@AfterClass(alwaysRun = true)
 	public void tearDown() throws Exception {

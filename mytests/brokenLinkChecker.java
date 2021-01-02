@@ -8,8 +8,17 @@ import static org.testng.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class Volt1 {
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Iterator;
+import java.util.List;
+
+
+public class brokenLinkChecker {
 	private WebDriver driver;
 	private String baseUrl;
 	private boolean acceptNextAlert = true;
@@ -30,33 +39,61 @@ public class Volt1 {
 	@Test
 	public void testCase1() throws Exception {
 		driver.get(baseUrl);
-		driver.findElement(By.linkText("Sign In")).click();
-		driver.findElement(By.id("Userid")).click();
-		// ERROR: Caught exception [ERROR: Unsupported command [doubleClick | id=Userid | ]]
-		driver.findElement(By.id("Userid")).clear();
-		driver.findElement(By.id("Userid")).sendKeys("a0001");
-		Thread.sleep(5000);
-		driver.findElement(By.name("accountpassword")).clear();
-		driver.findElement(By.name("accountpassword")).sendKeys("Abcd@1234");
-		Thread.sleep(5000);
-		driver.findElement(By.name("login")).click();
-		Thread.sleep(10000);
-		System.out.println("Successfulyy Passed login test");
-		// ERROR: Caught exception [unknown command [editContent]]
-		driver.findElement(By.id("dd")).click();
-		driver.findElement(By.xpath("//div[@id='dd']/ul/li[3]/a/div")).click();
-		driver.findElement(By.id("dd")).click();
-		System.out.println("Successfulyy Passed login test");
-		driver.findElement(By.xpath("//img[@alt='Viva Volt']")).click();
-		driver.findElement(By.xpath("//div[@id='admission']/div/div[2]/div/div[3]/div/div/span")).click();
-		driver.findElement(By.xpath("//div[@id='admission']/div/div[2]/div/div[3]/div[3]/div/span")).click();
-		driver.findElement(By.xpath("//div[@id='admission']/div/div[2]/div/div[3]/div[2]/div/span")).click();
-		driver.findElement(By.id("cars")).click();
-		System.out.println("Successfulyy Passed login test");
-		driver.findElement(By.xpath("//div[@id='admission']/div/div[2]/div[2]/div")).click();
-		driver.findElement(By.id("dd")).click();
-		driver.findElement(By.xpath("//div[@id='dd']/ul/li[4]/a/div")).click();
-		// ERROR: Caught exception [unknown command [editContent]]
+		String homePage = baseUrl;
+		String url = "";
+		HttpURLConnection huc = null;
+		int respCode = 200;
+
+		driver = new ChromeDriver();
+
+		driver.manage().window().maximize();
+
+		driver.get(homePage);
+
+		List<WebElement> links = driver.findElements(By.tagName("a"));
+
+		Iterator<WebElement> it = links.iterator();
+
+		while(it.hasNext()){
+
+			url = it.next().getAttribute("href");
+
+			System.out.println(url);
+
+			if(url == null || url.isEmpty()){
+				System.out.println("URL is either not configured for anchor tag or it is empty");
+				continue;
+			}
+
+			if(!url.startsWith(homePage)){
+				System.out.println("URL belongs to another domain, skipping it.");
+				continue;
+			}
+
+			try {
+				huc = (HttpURLConnection)(new URL(url).openConnection());
+
+				huc.setRequestMethod("HEAD");
+
+				huc.connect();
+
+				respCode = huc.getResponseCode();
+
+				if(respCode >= 400){
+					System.out.println(url+" is a broken link");
+				}
+				else{
+					System.out.println(url+" is a valid link");
+				}
+
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		driver.close();
 		driver.quit();
 	}	

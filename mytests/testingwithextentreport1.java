@@ -4,12 +4,16 @@ import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 import org.testng.annotations.*;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
 import static org.testng.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class Volt1 {
+public class testingwithextentreport1 {
 	private WebDriver driver;
 	private String baseUrl;
 	private boolean acceptNextAlert = true;
@@ -57,6 +61,15 @@ public class Volt1 {
 		driver.findElement(By.id("dd")).click();
 		driver.findElement(By.xpath("//div[@id='dd']/ul/li[4]/a/div")).click();
 		// ERROR: Caught exception [unknown command [editContent]]
+		ExtentReports reports = new ExtentReports("C:\\Users\\editor\\eclipse-workspace\\s2\\bin", true);
+
+		ExtentTest test = reports.startTest("TestName");
+		
+		test.log(LogStatus.PASS,"Test Passed");
+		test.log(LogStatus.FAIL,"Test Failed");
+		test.log(LogStatus.SKIP,"Test Skipped");
+		test.log(LogStatus.INFO,"Test Info");
+
 		driver.close();
 		driver.quit();
 	}	

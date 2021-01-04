@@ -1,5 +1,7 @@
 package testng;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.testng.annotations.*;
 
@@ -7,7 +9,7 @@ import static org.testng.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class loginChecker {
+public class TitleCheckerTest1 {
 	private WebDriver driver;
 	private String baseUrl;
 	private boolean acceptNextAlert = true;
@@ -28,22 +30,22 @@ public class loginChecker {
 	@Test
 	public void testCase1() throws Exception {
 		driver.get(baseUrl);
-		driver.findElement(By.linkText("Sign In")).click();
-		driver.findElement(By.id("Userid")).click();
-		// ERROR: Caught exception [ERROR: Unsupported command [doubleClick | id=Userid | ]]
-		driver.findElement(By.id("Userid")).clear();
-		driver.findElement(By.id("Userid")).sendKeys("a0001");
-		Thread.sleep(5000);
-		driver.findElement(By.name("accountpassword")).clear();
-		driver.findElement(By.name("accountpassword")).sendKeys("Abcd@1234");
-		Thread.sleep(5000);
-		driver.findElement(By.name("login")).click();
-		System.out.println("Successfulyy Passed login test");
-		// ERROR: Caught exception [unknown command [editContent]]
-		//Check for logout
-		driver.findElement(By.id("dd")).click();
-		driver.findElement(By.xpath("//div[@id='dd']/ul/li[4]/a/div")).click();
-		System.out.println("logout successfully");
+		List<WebElement> links = driver.findElements(By.tagName("a"));
+		Iterator<WebElement> it = links.iterator();
+		String url = "";
+		while(it.hasNext())
+		{
+			url=it.next().getAttribute("href");
+
+			if(!url.startsWith(baseUrl)){
+				System.out.println(driver.getTitle());
+				System.out.print(driver.getCurrentUrl());
+
+				System.out.println("URL belongs to another domain, skipping it.");
+				continue;
+			}
+
+		}
 		// ERROR: Caught exception [unknown command [editContent]]
 		driver.close();
 		driver.quit();

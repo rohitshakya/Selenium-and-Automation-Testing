@@ -19,7 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class brokenLinkCheckerTest2 {
+public class urlCollecter {
 	private WebDriver driver;
 	private String baseUrl;
 	private boolean acceptNextAlert = true;
@@ -39,6 +39,7 @@ public class brokenLinkCheckerTest2 {
 
 	@Test
 	public void testCase1() throws Exception {
+
 		int countUrl=0;
 		driver.get(baseUrl);
 		driver.findElement(By.linkText("Sign In")).click();
@@ -54,16 +55,16 @@ public class brokenLinkCheckerTest2 {
 		Thread.sleep(5000);
 		System.out.println("Successfulyy Passed login test");
 
-		String url = "";
-		HttpURLConnection huc = null;
-		int respCode = 200;
-
-		List<WebElement> links = driver.findElements(By.tagName("a"));
-		Iterator<WebElement> it = links.iterator();
-
+		String[] myLinks= {"https://sample.volt.development.vivadevops.com/",
+				"https://sample.volt.development.vivadevops.com/theme/gk/MjAyMS0x",
+				"https://sample.volt.development.vivadevops.com/theme-category/bGlmZS03/MjAyMS0x",
+				"https://volt.development.vivadevops.com/about-us",
+				"https://sample.volt.development.vivadevops.com/theme-subjects/gk-lessons/MjAyMS0x",
+				"https://sample.volt.development.vivadevops.com/theme-category/c2VnbWVudDM0NTQ0ISEz/MjAyMS0x",
+		"https://sample.volt.development.vivadevops.com/theme-topic-category/Mw==/MjAyMS0x"};
 
 		try {
-			File myObj = new File("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\myFileTest2.txt");
+			File myObj = new File("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\urlCollector.txt");
 			if (myObj.createNewFile()) {
 				System.out.println("File created: " + myObj.getName());
 			} else {
@@ -75,60 +76,74 @@ public class brokenLinkCheckerTest2 {
 		}
 
 		FileWriter myWriter = new FileWriter("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\myFileTest1.txt");
-		int counterForWebElement=0;
-		while(it.hasNext()){
-			myWriter.write(countUrl+" Text: "+ links.get(counterForWebElement).getText()+" id: "+links.get(counterForWebElement).getAttribute("id")+" Url "); //for getting text of each element
-			System.out.print(countUrl+" Text: "+ links.get(counterForWebElement).getText()+" id: "+links.get(counterForWebElement++).getAttribute("id")+" Url "); //for getting text of each element
-			++countUrl;
-			url = it.next().getAttribute("href");
-			if(url!=null)
-			{
-				myWriter.write(url);
 
-			}
-			System.out.println(url);
+		for(int i=0;i<myLinks.length;i++)
+		{
+			driver.get(myLinks[i]);
+			String url = "";
+			HttpURLConnection huc = null;
+			int respCode = 200;
 
-			if(url == null || url.isEmpty()){
+			List<WebElement> links = driver.findElements(By.tagName("a"));
+			Iterator<WebElement> it = links.iterator();
 
-				myWriter.write("URL is either not configured for anchor tag or it is empty\n");
-				System.out.println("URL is either not configured for anchor tag or it is empty");
-				continue;
-			}
+			int counterForWebElement=0;
+			while(it.hasNext()){
+				//myWriter.write(countUrl+" Text: "+ links.get(counterForWebElement).getText()+" id: "+links.get(counterForWebElement).getAttribute("id")+" Url "); //for getting text of each element
+				System.out.print(countUrl+" Text: "+ links.get(counterForWebElement).getText()+" id: "+links.get(counterForWebElement++).getAttribute("id")+" Url "); //for getting text of each element
+				++countUrl;
+				url = it.next().getAttribute("href");
+				if(url!=null)
+				{
+					myWriter.write("\""+url+"\",");
 
-			if(!url.startsWith(baseUrl)){
-				myWriter.write("URL belongs to another domain, skipping it.\n");
-				System.out.println("URL belongs to another domain, skipping it.");
-				continue;
-			}
-
-			try {
-				huc = (HttpURLConnection)(new URL(url).openConnection());
-
-				huc.setRequestMethod("HEAD");
-
-				huc.connect();
-
-				respCode = huc.getResponseCode();
-
-				if(respCode >= 400){
-					myWriter.write(url+ " is a broken link\n");
-					System.out.println(url+" is a broken link");
 				}
-				else{
-					myWriter.write(url+ " is a valid link\n");
-					System.out.println(url+" is a valid link");
+				System.out.println(url);
+
+				if(url == null || url.isEmpty()){
+
+					//myWriter.write("URL is either not configured for anchor tag or it is empty\n");
+					System.out.println("URL is either not configured for anchor tag or it is empty");
+					continue;
 				}
 
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				if(!url.startsWith(baseUrl)){
+					//myWriter.write("URL belongs to another domain, skipping it.\n");
+					System.out.println("URL belongs to another domain, skipping it.");
+					continue;
+				}
+
+				try {
+					huc = (HttpURLConnection)(new URL(url).openConnection());
+
+					huc.setRequestMethod("HEAD");
+
+					huc.connect();
+
+					respCode = huc.getResponseCode();
+
+					if(respCode >= 400){
+						//myWriter.write(url+ " is a broken link\n");
+						System.out.println(url+" is a broken link");
+					}
+					else{
+						//myWriter.write(url+ " is a valid link\n");
+						System.out.println(url+" is a valid link");
+					}
+
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
+			//myWriter.write("number of url in the website is "+ countUrl);
+			System.out.println("number of url's in the website is "+countUrl);
+
+			
 		}
-		myWriter.write("number of url in the website is "+ countUrl);
-		System.out.println("number of url's in the website is "+countUrl);
 		myWriter.close();
 		driver.close();
 		driver.quit();

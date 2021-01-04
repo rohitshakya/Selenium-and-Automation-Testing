@@ -2,16 +2,19 @@ package testng;
 
 import java.util.concurrent.TimeUnit;
 import org.testng.annotations.*;
-
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
+import java.io.File;  // Import the File class
+import java.io.IOException;  // Import the IOException class to handle errors
 
 import static org.testng.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Iterator;
+import java.util.List;
 
-public class testingwithextentreport1 {
+
+public class brokenImages {
 	private WebDriver driver;
 	private String baseUrl;
 	private boolean acceptNextAlert = true;
@@ -31,6 +34,7 @@ public class testingwithextentreport1 {
 
 	@Test
 	public void testCase1() throws Exception {
+
 		driver.get(baseUrl);
 		driver.findElement(By.linkText("Sign In")).click();
 		driver.findElement(By.id("Userid")).click();
@@ -42,35 +46,64 @@ public class testingwithextentreport1 {
 		driver.findElement(By.name("accountpassword")).sendKeys("Abcd@1234");
 		Thread.sleep(5000);
 		driver.findElement(By.name("login")).click();
-		Thread.sleep(10000);
+		Thread.sleep(5000);
 		System.out.println("Successfulyy Passed login test");
-		// ERROR: Caught exception [unknown command [editContent]]
-		driver.findElement(By.id("dd")).click();
-		driver.findElement(By.xpath("//div[@id='dd']/ul/li[3]/a/div")).click();
-		driver.findElement(By.id("dd")).click();
-		System.out.println("Successfulyy Passed login test");
-		driver.findElement(By.xpath("//img[@alt='Viva Volt']")).click();
-		driver.findElement(By.xpath("//div[@id='admission']/div/div[2]/div/div[3]/div/div/span")).click();
-		driver.findElement(By.xpath("//div[@id='admission']/div/div[2]/div/div[3]/div[3]/div/span")).click();
-		driver.findElement(By.xpath("//div[@id='admission']/div/div[2]/div/div[3]/div[2]/div/span")).click();
-		driver.findElement(By.id("cars")).click();
-		System.out.println("Successfulyy Passed login test");
-		driver.findElement(By.xpath("//div[@id='admission']/div/div[2]/div[2]/div")).click();
-		driver.findElement(By.id("dd")).click();
-		driver.findElement(By.xpath("//div[@id='dd']/ul/li[4]/a/div")).click();
-		// ERROR: Caught exception [unknown command [editContent]]
-		ExtentReports reports = new ExtentReports("C:\\Users\\editor\\eclipse-workspace\\s2\\bin", true);
 
-		ExtentTest test = reports.startTest("TestName");
+		List<WebElement> links = driver.findElements(By.tagName("a"));
+		Iterator<WebElement> it = links.iterator();
+		List<WebElement> images = driver.findElements(By.tagName("img"));
+		System.out.println("Total number of Images on the Page are " + images.size());
 
-		test.log(LogStatus.PASS,"Test Passed");
-		test.log(LogStatus.FAIL,"Test Failed");
-		test.log(LogStatus.SKIP,"Test Skipped");
-		test.log(LogStatus.INFO,"Test Info");
 
+		//checking the links fetched.
+		for(int index=0;index<images.size();index++)
+		{
+			WebElement image= images.get(index);
+			String imageURL= image.getAttribute("src");
+			System.out.println("URL of Image " + (index+1) + " is: " + imageURL);
+			verifyLinks(imageURL);
+
+			//Validate image display using JavaScript executor
+			try {
+				boolean imageDisplayed = (Boolean) ((JavascriptExecutor) driver).executeScript("return (typeof arguments[0].naturalWidth !=\"undefined\" && arguments[0].naturalWidth > 0);", image);
+				if (imageDisplayed) {
+					System.out.println("DISPLAY - OK");
+				}else {
+					System.out.println("DISPLAY - BROKEN");
+				}
+			} 
+			catch (Exception e) {
+				System.out.println("Error Occured");
+			}
+		}
 		driver.close();
 		driver.quit();
 	}	
+
+	public static void verifyLinks(String linkUrl)
+	{
+		try
+		{
+			URL url = new URL(linkUrl);
+
+			//Now we will be creating url connection and getting the response code
+			HttpURLConnection httpURLConnect=(HttpURLConnection)url.openConnection();
+			httpURLConnect.setConnectTimeout(5000);
+			httpURLConnect.connect();
+			if(httpURLConnect.getResponseCode()>=400)
+			{
+				System.out.println("HTTP STATUS - " + httpURLConnect.getResponseMessage() + "is a broken link");
+			}    
+
+			//Fetching and Printing the response code obtained
+			else{
+				System.out.println("HTTP STATUS - " + httpURLConnect.getResponseMessage());
+			}
+		}catch (Exception e) {
+		}
+	}
+
+
 
 	@AfterClass(alwaysRun = true)
 	public void tearDown() throws Exception {
@@ -114,3 +147,4 @@ public class testingwithextentreport1 {
 		}
 	}
 }
+

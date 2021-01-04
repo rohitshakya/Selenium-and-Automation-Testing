@@ -1,24 +1,13 @@
 package testng;
 
-import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 import org.testng.annotations.*;
 
 import static org.testng.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Iterator;
-import java.util.List;
-
-
-public class brokenLinkChecker {
+public class showGraphButtonChecker {
 	private WebDriver driver;
 	private String baseUrl;
 	private boolean acceptNextAlert = true;
@@ -39,61 +28,36 @@ public class brokenLinkChecker {
 	@Test
 	public void testCase1() throws Exception {
 		driver.get(baseUrl);
-		String homePage = baseUrl;
-		String url = "";
-		HttpURLConnection huc = null;
-		int respCode = 200;
-
-		driver = new ChromeDriver();
-
-		driver.manage().window().maximize();
-
-		driver.get(homePage);
-
-		List<WebElement> links = driver.findElements(By.tagName("a"));
-
-		Iterator<WebElement> it = links.iterator();
-
-		while(it.hasNext()){
-
-			url = it.next().getAttribute("href");
-
-			System.out.println(url);
-
-			if(url == null || url.isEmpty()){
-				System.out.println("URL is either not configured for anchor tag or it is empty");
-				continue;
-			}
-
-			if(!url.startsWith(homePage)){
-				System.out.println("URL belongs to another domain, skipping it.");
-				continue;
-			}
-
-			try {
-				huc = (HttpURLConnection)(new URL(url).openConnection());
-
-				huc.setRequestMethod("HEAD");
-
-				huc.connect();
-
-				respCode = huc.getResponseCode();
-
-				if(respCode >= 400){
-					System.out.println(url+" is a broken link");
-				}
-				else{
-					System.out.println(url+" is a valid link");
-				}
-
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		driver.findElement(By.linkText("Sign In")).click();
+		driver.findElement(By.id("Userid")).click();
+		// ERROR: Caught exception [ERROR: Unsupported command [doubleClick | id=Userid | ]]
+		driver.findElement(By.id("Userid")).clear();
+		driver.findElement(By.id("Userid")).sendKeys("a0001");
+		driver.findElement(By.name("accountpassword")).clear();
+		driver.findElement(By.name("accountpassword")).sendKeys("Abcd@1234");
+		Thread.sleep(2000);
+		driver.findElement(By.name("login")).click();
+		System.out.println("Successfulyy Passed login test");
+		boolean var=isElementPresent(By.className("switch"));
+		System.out.println("Presence status "+var);
+		// verify if the “Google Search” button is displayed and print the result
+		WebElement homeButtonPresence=driver.findElement(By.className("switch"));
+		if (homeButtonPresence.isDisplayed() && homeButtonPresence.isEnabled()) {
+			homeButtonPresence.click();
+			System.out.println("Successfully clicked");
 		}
+		WebElement homeButtonPresence1=driver.findElement(By.className("switch"));
+		if (homeButtonPresence1.isDisplayed() && homeButtonPresence1.isDisplayed()) {
+			homeButtonPresence1.click();
+			System.out.println("Successfully displayed");
+		}
+		
+		else
+		{
+			System.out.println("not found the radio button");
+		}
+		
+		// ERROR: Caught exception [unknown command [editContent]]
 		driver.close();
 		driver.quit();
 	}	

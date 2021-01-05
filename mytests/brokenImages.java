@@ -28,6 +28,7 @@ public class brokenImages {
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		baseUrl = "https://volt.development.vivadevops.com/\"";
+		//baseUrl = "https://volt.vivadevops.com/\"";
 		driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
@@ -60,13 +61,16 @@ public class brokenImages {
 		{
 			WebElement image= images.get(index);
 			String imageURL= image.getAttribute("src");
+			Boolean input = isAttribtuePresent(image, "alt");
+			//System.out.println(input);
+
 			System.out.println("URL of Image " + (index+1) + " is: " + imageURL);
 			verifyLinks(imageURL);
 
 			//Validate image display using JavaScript executor
 			try {
 				boolean imageDisplayed = (Boolean) ((JavascriptExecutor) driver).executeScript("return (typeof arguments[0].naturalWidth !=\"undefined\" && arguments[0].naturalWidth > 0);", image);
-				if (imageDisplayed) {
+				if (imageDisplayed&&input) {
 					System.out.println("DISPLAY - OK");
 				}else {
 					System.out.println("DISPLAY - BROKEN");
@@ -79,6 +83,19 @@ public class brokenImages {
 		driver.close();
 		driver.quit();
 	}	
+
+
+	private boolean isAttribtuePresent(WebElement element, String attribute) {
+		Boolean result = false;
+		try {
+			String value = element.getAttribute(attribute);
+			if (value != null){
+				result = true;
+			}
+		} catch (Exception e) {}
+
+		return result;
+	}
 
 	public static void verifyLinks(String linkUrl)
 	{

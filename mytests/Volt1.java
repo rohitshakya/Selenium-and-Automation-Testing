@@ -45,16 +45,6 @@ public class Volt1 {
 		driver.findElement(By.xpath("//div[@id='dd']/ul/li[3]/a/div")).click();
 		driver.findElement(By.id("dd")).click();
 		System.out.println("Successfulyy Passed login test");
-		driver.findElement(By.xpath("//img[@alt='Viva Volt']")).click();
-		driver.findElement(By.xpath("//div[@id='admission']/div/div[2]/div/div[3]/div/div/span")).click();
-		driver.findElement(By.xpath("//div[@id='admission']/div/div[2]/div/div[3]/div[3]/div/span")).click();
-		driver.findElement(By.xpath("//div[@id='admission']/div/div[2]/div/div[3]/div[2]/div/span")).click();
-		driver.findElement(By.id("cars")).click();
-		System.out.println("Successfulyy Passed login test");
-		driver.findElement(By.xpath("//div[@id='admission']/div/div[2]/div[2]/div")).click();
-		driver.findElement(By.id("dd")).click();
-		driver.findElement(By.xpath("//div[@id='dd']/ul/li[4]/a/div")).click();
-		// ERROR: Caught exception [unknown command [editContent]]
 		driver.close();
 		driver.quit();
 	}	

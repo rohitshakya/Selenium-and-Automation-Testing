@@ -61,7 +61,8 @@ public class urlCollecter {
 				"https://volt.development.vivadevops.com/about-us",
 				"https://sample.volt.development.vivadevops.com/theme-subjects/gk-lessons/MjAyMS0x",
 				"https://sample.volt.development.vivadevops.com/theme-category/c2VnbWVudDM0NTQ0ISEz/MjAyMS0x",
-		"https://sample.volt.development.vivadevops.com/theme-topic-category/Mw==/MjAyMS0x"};
+				"https://sample.volt.development.vivadevops.com/theme-topic-category/Mw==/MjAyMS0x",
+		"https://sample.volt.development.vivadevops.com/theme-category/bGlmZS03/MjAyMS0x"};
 
 		try {
 			File myObj = new File("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\urlCollector.txt");
@@ -84,7 +85,7 @@ public class urlCollecter {
 			HttpURLConnection huc = null;
 			int respCode = 200;
 
-			List<WebElement> links = driver.findElements(By.tagName("a"));
+			List<WebElement> links = driver.findElements(By.className("href"));
 			Iterator<WebElement> it = links.iterator();
 
 			int counterForWebElement=0;
@@ -142,7 +143,7 @@ public class urlCollecter {
 			//myWriter.write("number of url in the website is "+ countUrl);
 			System.out.println("number of url's in the website is "+countUrl);
 
-			
+
 		}
 		myWriter.close();
 		driver.close();

@@ -28,9 +28,9 @@ public class brokenImages {
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		baseUrl = "https://volt.development.vivadevops.com/\"";
-		//baseUrl = "https://volt.vivadevops.com/\"";
 		driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		
 	}
 
 	@Test
@@ -49,9 +49,7 @@ public class brokenImages {
 		driver.findElement(By.name("login")).click();
 		Thread.sleep(5000);
 		System.out.println("Successfulyy Passed login test");
-
-		List<WebElement> links = driver.findElements(By.tagName("a"));
-		Iterator<WebElement> it = links.iterator();
+		
 		List<WebElement> images = driver.findElements(By.tagName("img"));
 		System.out.println("Total number of Images on the Page are " + images.size());
 
@@ -80,6 +78,13 @@ public class brokenImages {
 				System.out.println("Error Occured");
 			}
 		}
+		
+		//logout automated code
+		driver.findElement(By.id("dd")).click();
+		driver.findElement(By.xpath("//div[@id='dd']/ul/li[4]/a/div")).click();
+		System.out.println("logout successfully");
+		
+		//driver close tag
 		driver.close();
 		driver.quit();
 	}	

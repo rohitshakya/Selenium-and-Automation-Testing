@@ -33,7 +33,6 @@ public class brokenLinkCheckerTest1 {
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		baseUrl = "https://volt.development.vivadevops.com/\"";
-		//baseUrl = "https://volt.vivadevops.com/\"";
 		driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}

@@ -29,11 +29,6 @@ public class ImageAltChecker {
 	@Test
 	public void testCase1() throws Exception {
 		driver.get(baseUrl);
-		/*
-		 * List<WebElement> links = driver.findElements(By.tagName("a"));
-		 * links.iterator();
-		 */
-		
 		WebElement input = driver.findElement(By.tagName("img"));
 		Boolean checked = isAttribtuePresent(input, "alt");
 		System.out.println(checked);

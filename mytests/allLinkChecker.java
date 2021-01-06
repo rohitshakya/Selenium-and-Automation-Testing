@@ -52,13 +52,11 @@ public class allLinkChecker {
 		driver.findElement(By.name("login")).click();
 		Thread.sleep(5000);
 		System.out.println("Successfulyy Passed login test");
-		String[] myLinks= {"https://sample.volt.development.vivadevops.com/",
-				"https://sample.volt.development.vivadevops.com/theme/gk/MjAyMS0x",
-				"https://sample.volt.development.vivadevops.com/theme-category/bGlmZS03/MjAyMS0x",
+		String[] myLinks= {"https://volt.development.vivadevops.com/",
 				"https://volt.development.vivadevops.com/about-us",
-				"https://sample.volt.development.vivadevops.com/theme-subjects/gk-lessons/MjAyMS0x",
-				"https://sample.volt.development.vivadevops.com/theme-category/c2VnbWVudDM0NTQ0ISEz/MjAyMS0x",
-		"https://sample.volt.development.vivadevops.com/theme-topic-category/Mw==/MjAyMS0x"};
+				"https://volt.development.vivadevops.com/theme-subjects/gk-lessons/MjAyMS0x",
+				"https://volt.development.vivadevops.com/theme-category/c2VnbWVudDM0NTQ0ISEz/MjAyMS0x",
+		"https://volt.development.vivadevops.com/theme-topic-category/Mw==/MjAyMS0x"};
 		for(int i=0;i<myLinks.length;i++)
 		{
 			driver.get(myLinks[i]);
@@ -139,7 +137,12 @@ public class allLinkChecker {
 			System.out.println("number of url's in the website is "+countUrl);
 			myWriter.close();
 		}
+		//logout automated code
+		driver.findElement(By.id("dd")).click();
+		driver.findElement(By.xpath("//div[@id='dd']/ul/li[4]/a/div")).click();
+		System.out.println("logout successfully");
 
+		//driver close tag
 		driver.close();
 		driver.quit();
 	}	

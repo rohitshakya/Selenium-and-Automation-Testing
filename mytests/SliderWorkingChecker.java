@@ -7,7 +7,7 @@ import static org.testng.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class loginChecker {
+public class SliderWorkingChecker {
 	private WebDriver driver;
 	private String baseUrl;
 	private boolean acceptNextAlert = true;
@@ -28,54 +28,24 @@ public class loginChecker {
 	@Test
 	public void testCase1() throws Exception {
 		driver.get(baseUrl);
-		if(isElementPresent(By.linkText("Sign In")))
+		//Slider Checker
+		if(isElementPresent(By.xpath("//div[@id='mainSlider']/div")))
 		{
 
-			System.out.println(driver.findElement(By.linkText("Sign In")).isDisplayed());
-			driver.findElement(By.linkText("Sign In")).click();
-			if(isElementPresent(By.id("Userid")))
+			driver.findElement(By.xpath("//div[@id='mainSlider']/div[2]/a[2]")).click();
+			driver.findElement(By.xpath("//div[@id='mainSlider']/div[2]/a[2]")).click();
+			if(isElementPresent(By.xpath("//div[@id='mainSlider']/div/div/div[3]/div/video")))
 			{
-				driver.findElement(By.id("Userid")).clear();
-				driver.findElement(By.id("Userid")).sendKeys("a0001");
-				driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+				driver.findElement(By.xpath("//div[@id='mainSlider']/div/div/div[3]/div/video")).click();
+				System.out.println("video played");
+				Thread.sleep(50000);
 			}
 			else
-			{
-				System.out.println("not found userid");
-			}
-			if(isElementPresent(By.name("accountpassword")))
-			{
-				driver.findElement(By.name("accountpassword")).clear();
-				driver.findElement(By.name("accountpassword")).sendKeys("Abcd@1234");
-				driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);	
-			}
-			else
-			{
-				System.out.println("not found password");
-			}
-			// ERROR: Caught exception [ERROR: Unsupported command [doubleClick | id=Userid | ]]
-			if(isElementPresent(By.name("login")))
-			{
-				driver.findElement(By.name("login")).click();
-				System.out.println("Successfulyy Passed login test");
-				//logout checker
-				if(isElementPresent(By.id("dd")))
-				{
-					driver.findElement(By.id("dd")).click();
-					driver.findElement(By.id("dd")).click();
-					System.out.println("Successfulyy Passed login logout test");
-				}
+				System.out.println("video not found");
+			
+		}
 
-			}
-			else
-			{
-				System.out.println("Not logged in succesfully");
-			}
-		}
-		else
-		{
-			System.out.println("Not found sign in button");
-		}
+		System.out.println("Successfully slider tested");
 		driver.close();
 		driver.quit();
 	}	

@@ -1,4 +1,4 @@
-package testng;
+package suite1;
 
 import org.testng.annotations.*;
 import static org.testng.Assert.*;

@@ -1,4 +1,4 @@
-package testng;
+package Suite2;
 
 import java.util.concurrent.TimeUnit;
 import org.testng.annotations.*;
@@ -7,7 +7,7 @@ import static org.testng.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class SliderWorkingChecker {
+public class Test1 {
 	private WebDriver driver;
 	private String baseUrl;
 	private boolean acceptNextAlert = true;
@@ -20,7 +20,7 @@ public class SliderWorkingChecker {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
-		baseUrl = "https://volt.development.vivadevops.com/\"";
+		baseUrl = "https://volt.development.vivadevops.com/master";
 		driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
@@ -28,26 +28,60 @@ public class SliderWorkingChecker {
 	@Test
 	public void testCase1() throws Exception {
 		driver.get(baseUrl);
-		//Slider Checker
-		if(isElementPresent(By.xpath("//div[@id='mainSlider']/div")))
+		if(isElementPresent(By.name("email")))
 		{
 
-			driver.findElement(By.xpath("//div[@id='mainSlider']/div[2]/a[2]")).click();
-			driver.findElement(By.xpath("//div[@id='mainSlider']/div[2]/a[2]")).click();
-			if(isElementPresent(By.xpath("//div[@id='mainSlider']/div/div/div[3]/div/video")))
+			System.out.println(driver.findElement(By.name("email")).isDisplayed());
+			driver.findElement(By.name("email")).click();
+			if(isElementPresent(By.name("email")))
 			{
-				driver.findElement(By.xpath("//div[@id='mainSlider']/div/div/div[3]/div/video")).click();
-				System.out.println("video played");
-				Thread.sleep(50000);
+				driver.findElement(By.name("email")).clear();
+				driver.findElement(By.name("email")).sendKeys("a0018");
+				driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 			}
 			else
-				System.out.println("video not found");
-			
+			{
+				System.out.println("not found userid");
+			}
+			if(isElementPresent(By.name("password")))
+			{
+				driver.findElement(By.name("password")).clear();
+				driver.findElement(By.name("password")).sendKeys("V1v@Books");
+				driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);	
+			}
+			else
+			{
+				System.out.println("not found password");
+			}
+			// ERROR: Caught exception [ERROR: Unsupported command [doubleClick | id=Userid | ]]
+			if(isElementPresent(By.name("loginSubmit")))
+			{
+				driver.findElement(By.name("loginSubmit")).click();
+				System.out.println("Successfulyy Passed login test");
+				//logout checker
+
+				System.out.println("Successfulyy Passed login logout test");
+				Thread.sleep(50000);
+
+
+			}
+			else
+			{
+				System.out.println("Not logged in succesfully");
+			}
+		}
+		else
+		{
+			System.out.println("Not found sign in button");
 		}
 
-		System.out.println("Successfully slider tested");
+
+	}
+	@Test
+	public void testCase2() throws Exception {
+		driver.get(baseUrl);
+		System.out.println("check for method 2");
 		driver.close();
-		driver.quit();
 	}	
 
 	@AfterClass(alwaysRun = true)

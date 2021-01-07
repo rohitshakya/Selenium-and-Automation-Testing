@@ -1,7 +1,5 @@
-package testng;
+package suite1;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.testng.annotations.*;
 
@@ -9,7 +7,7 @@ import static org.testng.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class TitleCheckerTest1 {
+public class SliderWorkingChecker {
 	private WebDriver driver;
 	private String baseUrl;
 	private boolean acceptNextAlert = true;
@@ -30,23 +28,24 @@ public class TitleCheckerTest1 {
 	@Test
 	public void testCase1() throws Exception {
 		driver.get(baseUrl);
-		List<WebElement> links = driver.findElements(By.tagName("a"));
-		Iterator<WebElement> it = links.iterator();
-		String url = "";
-		while(it.hasNext())
+		//Slider Checker
+		if(isElementPresent(By.xpath("//div[@id='mainSlider']/div")))
 		{
-			url=it.next().getAttribute("href");
 
-			if(!url.startsWith(baseUrl)){
-				System.out.println(driver.getTitle());
-				System.out.print(driver.getCurrentUrl());
-
-				System.out.println("URL belongs to another domain, skipping it.");
-				continue;
+			driver.findElement(By.xpath("//div[@id='mainSlider']/div[2]/a[2]")).click();
+			driver.findElement(By.xpath("//div[@id='mainSlider']/div[2]/a[2]")).click();
+			if(isElementPresent(By.xpath("//div[@id='mainSlider']/div/div/div[3]/div/video")))
+			{
+				driver.findElement(By.xpath("//div[@id='mainSlider']/div/div/div[3]/div/video")).click();
+				System.out.println("video played");
+				Thread.sleep(50000);
 			}
-
+			else
+				System.out.println("video not found");
+			
 		}
-		// ERROR: Caught exception [unknown command [editContent]]
+
+		System.out.println("Successfully slider tested");
 		driver.close();
 		driver.quit();
 	}	

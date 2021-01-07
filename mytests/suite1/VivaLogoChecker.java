@@ -1,4 +1,4 @@
-package testng;
+package suite1;
 
 import java.util.concurrent.TimeUnit;
 import org.testng.annotations.*;
@@ -7,7 +7,7 @@ import static org.testng.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class showGraphButtonChecker {
+public class VivaLogoChecker {
 	private WebDriver driver;
 	private String baseUrl;
 	private boolean acceptNextAlert = true;
@@ -28,36 +28,20 @@ public class showGraphButtonChecker {
 	@Test
 	public void testCase1() throws Exception {
 		driver.get(baseUrl);
-		driver.findElement(By.linkText("Sign In")).click();
-		driver.findElement(By.id("Userid")).click();
-		// ERROR: Caught exception [ERROR: Unsupported command [doubleClick | id=Userid | ]]
-		driver.findElement(By.id("Userid")).clear();
-		driver.findElement(By.id("Userid")).sendKeys("a0001");
-		driver.findElement(By.name("accountpassword")).clear();
-		driver.findElement(By.name("accountpassword")).sendKeys("Abcd@1234");
-		Thread.sleep(2000);
-		driver.findElement(By.name("login")).click();
-		System.out.println("Successfulyy Passed login test");
-		boolean var=isElementPresent(By.className("switch"));
-		System.out.println("Presence status "+var);
-		// verify if the “Google Search” button is displayed and print the result
-		WebElement homeButtonPresence=driver.findElement(By.className("switch"));
-		if (homeButtonPresence.isDisplayed() && homeButtonPresence.isEnabled()) {
-			homeButtonPresence.click();
-			System.out.println("Successfully clicked");
+		//viva logo checker
+		if(isElementPresent(By.xpath("//img[@alt='Viva Volt']")))
+		{
+
+			System.out.println(driver.findElement(By.xpath("//img[@alt='Viva Volt']")).isDisplayed());
+			driver.findElement(By.xpath("//img[@alt='Viva Volt']")).click();
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.findElement(By.xpath("//img[@alt='Viva Volt']")).getScreenshotAs(OutputType.FILE);
 		}
-		WebElement homeButtonPresence1=driver.findElement(By.className("switch"));
-		if (homeButtonPresence1.isDisplayed() && homeButtonPresence1.isDisplayed()) {
-			homeButtonPresence1.click();
-			System.out.println("Successfully displayed");
-		}
-		
 		else
 		{
-			System.out.println("not found the radio button");
+			System.out.println("viva logo not present");
 		}
-		
-		// ERROR: Caught exception [unknown command [editContent]]
+		System.out.println("Successfully viva logo tested");
 		driver.close();
 		driver.quit();
 	}	

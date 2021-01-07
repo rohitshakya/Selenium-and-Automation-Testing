@@ -1,4 +1,4 @@
-package testng;
+package suite1;
 
 import java.util.concurrent.TimeUnit;
 import org.testng.annotations.*;

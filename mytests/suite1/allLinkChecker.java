@@ -1,8 +1,7 @@
-package testng;
+package suite1;
 
 import java.util.concurrent.TimeUnit;
 import org.testng.annotations.*;
-
 
 import java.io.File;  // Import the File class
 import java.io.FileWriter;
@@ -19,7 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class urlCollecter {
+public class allLinkChecker {
 	private WebDriver driver;
 	private String baseUrl;
 	private boolean acceptNextAlert = true;
@@ -39,7 +38,6 @@ public class urlCollecter {
 
 	@Test
 	public void testCase1() throws Exception {
-
 		int countUrl=0;
 		driver.get(baseUrl);
 		driver.findElement(By.linkText("Sign In")).click();
@@ -54,30 +52,11 @@ public class urlCollecter {
 		driver.findElement(By.name("login")).click();
 		Thread.sleep(5000);
 		System.out.println("Successfulyy Passed login test");
-
-		String[] myLinks= {"https://sample.volt.development.vivadevops.com/",
-				"https://sample.volt.development.vivadevops.com/theme/gk/MjAyMS0x",
-				"https://sample.volt.development.vivadevops.com/theme-category/bGlmZS03/MjAyMS0x",
+		String[] myLinks= {"https://volt.development.vivadevops.com/",
 				"https://volt.development.vivadevops.com/about-us",
-				"https://sample.volt.development.vivadevops.com/theme-subjects/gk-lessons/MjAyMS0x",
-				"https://sample.volt.development.vivadevops.com/theme-category/c2VnbWVudDM0NTQ0ISEz/MjAyMS0x",
-				"https://sample.volt.development.vivadevops.com/theme-topic-category/Mw==/MjAyMS0x",
-		"https://sample.volt.development.vivadevops.com/theme-category/bGlmZS03/MjAyMS0x"};
-
-		try {
-			File myObj = new File("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\urlCollector.txt");
-			if (myObj.createNewFile()) {
-				System.out.println("File created: " + myObj.getName());
-			} else {
-				System.out.println("File already exists.");
-			}
-		} catch (IOException e) {
-			System.out.println("An error occurred.");
-			e.printStackTrace();
-		}
-
-		FileWriter myWriter = new FileWriter("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\myFileTest1.txt");
-
+				"https://volt.development.vivadevops.com/theme-subjects/gk-lessons/MjAyMS0x",
+				"https://volt.development.vivadevops.com/theme-category/c2VnbWVudDM0NTQ0ISEz/MjAyMS0x",
+		"https://volt.development.vivadevops.com/theme-topic-category/Mw==/MjAyMS0x"};
 		for(int i=0;i<myLinks.length;i++)
 		{
 			driver.get(myLinks[i]);
@@ -85,31 +64,45 @@ public class urlCollecter {
 			HttpURLConnection huc = null;
 			int respCode = 200;
 
-			List<WebElement> links = driver.findElements(By.className("href"));
+			List<WebElement> links = driver.findElements(By.tagName("a"));
 			Iterator<WebElement> it = links.iterator();
 
+
+			try {
+				File myObj = new File("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\myFileTest2.txt");
+				if (myObj.createNewFile()) {
+					System.out.println("File created: " + myObj.getName());
+				} else {
+					System.out.println("File already exists.");
+				}
+			} catch (IOException e) {
+				System.out.println("An error occurred.");
+				e.printStackTrace();
+			}
+
+			FileWriter myWriter = new FileWriter("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\myFileTest1.txt");
 			int counterForWebElement=0;
 			while(it.hasNext()){
-				//myWriter.write(countUrl+" Text: "+ links.get(counterForWebElement).getText()+" id: "+links.get(counterForWebElement).getAttribute("id")+" Url "); //for getting text of each element
+				myWriter.write(countUrl+" Text: "+ links.get(counterForWebElement).getText()+" id: "+links.get(counterForWebElement).getAttribute("id")+" Url "); //for getting text of each element
 				System.out.print(countUrl+" Text: "+ links.get(counterForWebElement).getText()+" id: "+links.get(counterForWebElement++).getAttribute("id")+" Url "); //for getting text of each element
 				++countUrl;
 				url = it.next().getAttribute("href");
 				if(url!=null)
 				{
-					myWriter.write("\""+url+"\",");
+					myWriter.write(url);
 
 				}
 				System.out.println(url);
 
 				if(url == null || url.isEmpty()){
 
-					//myWriter.write("URL is either not configured for anchor tag or it is empty\n");
+					myWriter.write("URL is either not configured for anchor tag or it is empty\n");
 					System.out.println("URL is either not configured for anchor tag or it is empty");
 					continue;
 				}
 
 				if(!url.startsWith(baseUrl)){
-					//myWriter.write("URL belongs to another domain, skipping it.\n");
+					myWriter.write("URL belongs to another domain, skipping it.\n");
 					System.out.println("URL belongs to another domain, skipping it.");
 					continue;
 				}
@@ -124,11 +117,11 @@ public class urlCollecter {
 					respCode = huc.getResponseCode();
 
 					if(respCode >= 400){
-						//myWriter.write(url+ " is a broken link\n");
+						myWriter.write(url+ " is a broken link\n");
 						System.out.println(url+" is a broken link");
 					}
 					else{
-						//myWriter.write(url+ " is a valid link\n");
+						myWriter.write(url+ " is a valid link\n");
 						System.out.println(url+" is a valid link");
 					}
 
@@ -140,12 +133,16 @@ public class urlCollecter {
 					e.printStackTrace();
 				}
 			}
-			//myWriter.write("number of url in the website is "+ countUrl);
+			myWriter.write("number of url in the website is "+ countUrl);
 			System.out.println("number of url's in the website is "+countUrl);
-
-
+			myWriter.close();
 		}
-		myWriter.close();
+		//logout automated code
+		driver.findElement(By.id("dd")).click();
+		driver.findElement(By.xpath("//div[@id='dd']/ul/li[4]/a/div")).click();
+		System.out.println("logout successfully");
+
+		//driver close tag
 		driver.close();
 		driver.quit();
 	}	

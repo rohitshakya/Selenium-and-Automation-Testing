@@ -1,0 +1,22 @@
+0 Text:  id:  Url https://volt.development.vivadevops.com/URL belongs to another domain, skipping it.
+1 Text: Sign In id:  Url URL is either not configured for anchor tag or it is empty
+2 Text:  id:  Url URL is either not configured for anchor tag or it is empty
+3 Text:  id:  Url URL is either not configured for anchor tag or it is empty
+4 Text:  id:  Url URL is either not configured for anchor tag or it is empty
+5 Text:  id:  Url URL is either not configured for anchor tag or it is empty
+6 Text:  id:  Url URL is either not configured for anchor tag or it is empty
+7 Text:  id:  Url URL is either not configured for anchor tag or it is empty
+8 Text: Start Learning id:  Url URL is either not configured for anchor tag or it is empty
+9 Text: Start Learning id:  Url URL is either not configured for anchor tag or it is empty
+10 Text:  id:  Url https://volt.development.vivadevops.com/URL belongs to another domain, skipping it.
+11 Text: About Us id:  Url https://volt.development.vivadevops.com/about-usURL belongs to another domain, skipping it.
+12 Text: Contact Us id:  Url https://volt.development.vivadevops.com/contact-usURL belongs to another domain, skipping it.
+13 Text: Privacy Policy id:  Url https://volt.development.vivadevops.com/privacy-policyURL belongs to another domain, skipping it.
+14 Text: Terms of Service id:  Url https://volt.development.vivadevops.com/terms-of-serviceURL belongs to another domain, skipping it.
+15 Text: Refund Policy id:  Url https://volt.development.vivadevops.com/refund-policyURL belongs to another domain, skipping it.
+16 Text: Instagram id:  Url https://www.instagram.com/viva.volt/URL belongs to another domain, skipping it.
+17 Text: Facebook id:  Url https://www.facebook.com/VOLT.VIVAURL belongs to another domain, skipping it.
+18 Text: Twitter id:  Url https://twitter.com/VIVA_VOLTURL belongs to another domain, skipping it.
+19 Text:  id:  Url https://volt.development.vivadevops.com/forgot-passwordURL belongs to another domain, skipping it.
+20 Text:  id: scrollUp Url https://volt.development.vivadevops.com/%22#topURL belongs to another domain, skipping it.
+number of url in the website is 21

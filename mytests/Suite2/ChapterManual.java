@@ -16,7 +16,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class ModuleManual {
+public class ChapterManual {
 	private WebDriver driver;
 	private boolean acceptNextAlert = true;
 	private StringBuffer verificationErrors = new StringBuffer();
@@ -42,22 +42,31 @@ public class ModuleManual {
 		driver.findElement(By.name("password")).sendKeys("Volt@0202");
 		driver.findElement(By.name("password")).sendKeys(Keys.ENTER);
 		//MAIN SCRIPT START
-		driver.get("https://volt.development.vivadevops.com/master/admin/modulelist");
-		driver.findElement(By.xpath("//li[4]/a/p")).click();
+
+		driver.get("https://volt.development.vivadevops.com/master/admin/chapteradd/");
+		driver.findElement(By.xpath("//li[6]/a/p")).click();
 		driver.findElement(By.xpath("//a/h4")).click();
 		driver.findElement(By.xpath("//form[@id='createcourse']/div/div/div[2]/div/div/button/span")).click();
-		driver.findElement(By.xpath("//form[@id='createcourse']/div/div/div[2]/div/div/div/ul/li[4]/a")).click();
-		new Select(driver.findElement(By.id("changeCls"))).selectByVisibleText("Class 7");
+		driver.findElement(By.xpath("//form[@id='createcourse']/div/div/div[2]/div/div/div/ul/li[8]/a")).click();
+		new Select(driver.findElement(By.id("changeCls"))).selectByVisibleText("Class 7"); //class 
 		driver.findElement(By.xpath("//form[@id='createcourse']/div/div/div[2]/div[2]/div/button/span")).click();
-		new Select(driver.findElement(By.id("getsubject"))).selectByVisibleText("G.K TEST");
-		driver.findElement(By.name("mtitle")).click();
-		driver.findElement(By.name("mtitle")).clear();
-		driver.findElement(By.name("mtitle")).sendKeys("TestModuleRohit", Keys.TAB,Keys.TAB,Keys.ENTER); //module name
-		driver.findElement(By.name("moduleImage")).click();
-		driver.findElement(By.name("moduleImage")).clear();
-		driver.findElement(By.name("moduleimage")).sendKeys("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\moduleImage.jpg");
-		driver.findElement(By.xpath("//button[@type='submit']")).click();
-		System.out.println("Module created successfully");
+		new Select(driver.findElement(By.id("getsubject"))).selectByVisibleText("G.K TEST"); //subject
+		driver.findElement(By.xpath("(//button[@type='button'])[4]")).click();
+		driver.findElement(By.xpath("//form[@id='createcourse']/div/div/div[2]/div[3]/div/button/span")).click();
+		new Select(driver.findElement(By.id("setmodule"))).selectByVisibleText("ModuleRohit"); //module
+		driver.findElement(By.xpath("//form[@id='createcourse']/div/div/div[2]/div[3]/div/button/span")).click();
+		driver.findElement(By.xpath("//form[@id='createcourse']/div/div/div[2]/div[3]/div/button/span")).click();
+		driver.findElement(By.xpath("//form[@id='createcourse']/div/div/div[2]/div[4]/div/button/span")).click();
+		driver.findElement(By.xpath("//form[@id='createcourse']/div/div/div[2]/div[4]/div/button/span")).click();
+		new Select(driver.findElement(By.id("setseries"))).selectByVisibleText("Theme2Geography");
+		driver.findElement(By.name("coursetitle")).click();
+		driver.findElement(By.name("coursetitle")).clear();
+		driver.findElement(By.name("coursetitle")).sendKeys("Tenali Rama Three"); //chapter name
+		driver.findElement(By.name("coursedetail")).click();
+		driver.findElement(By.name("coursedetail")).clear();
+		driver.findElement(By.name("coursedetail")).sendKeys("Tales of TenaLi Rama",Keys.TAB,Keys.TAB,Keys.ENTER); //chapter description
+		Thread.sleep(5000);
+		System.out.println("chapter created successfully");
 	}
 
 	@AfterClass(alwaysRun = true)

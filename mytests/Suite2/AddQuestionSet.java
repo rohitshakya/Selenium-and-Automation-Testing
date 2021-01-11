@@ -16,7 +16,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class ModuleManual {
+public class AddQuestionSet {
 	private WebDriver driver;
 	private boolean acceptNextAlert = true;
 	private StringBuffer verificationErrors = new StringBuffer();
@@ -42,22 +42,24 @@ public class ModuleManual {
 		driver.findElement(By.name("password")).sendKeys("Volt@0202");
 		driver.findElement(By.name("password")).sendKeys(Keys.ENTER);
 		//MAIN SCRIPT START
-		driver.get("https://volt.development.vivadevops.com/master/admin/modulelist");
-		driver.findElement(By.xpath("//li[4]/a/p")).click();
+
+		driver.get("https://volt.development.vivadevops.com/master/question");
+
+		driver.findElement(By.xpath("//li[8]/a/p")).click();
 		driver.findElement(By.xpath("//a/h4")).click();
-		driver.findElement(By.xpath("//form[@id='createcourse']/div/div/div[2]/div/div/button/span")).click();
-		driver.findElement(By.xpath("//form[@id='createcourse']/div/div/div[2]/div/div/div/ul/li[4]/a")).click();
-		new Select(driver.findElement(By.id("changeCls"))).selectByVisibleText("Class 7");
-		driver.findElement(By.xpath("//form[@id='createcourse']/div/div/div[2]/div[2]/div/button/span")).click();
+
+		driver.findElement(By.name("title")).clear();
+		driver.findElement(By.name("title")).sendKeys("SET NAME ROHIT");
+		new Select(driver.findElement(By.id("classis"))).selectByVisibleText("Class 7");
 		new Select(driver.findElement(By.id("getsubject"))).selectByVisibleText("G.K TEST");
-		driver.findElement(By.name("mtitle")).click();
-		driver.findElement(By.name("mtitle")).clear();
-		driver.findElement(By.name("mtitle")).sendKeys("TestModuleRohit", Keys.TAB,Keys.TAB,Keys.ENTER); //module name
-		driver.findElement(By.name("moduleImage")).click();
-		driver.findElement(By.name("moduleImage")).clear();
-		driver.findElement(By.name("moduleimage")).sendKeys("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\moduleImage.jpg");
-		driver.findElement(By.xpath("//button[@type='submit']")).click();
-		System.out.println("Module created successfully");
+		new Select(driver.findElement(By.id("setmodule"))).selectByVisibleText("ModuleRohit");
+		new Select(driver.findElement(By.id("setseries"))).selectByVisibleText("Theme2Geography");
+		new Select(driver.findElement(By.name("chapter"))).selectByVisibleText("Chapter 1");
+		new Select(driver.findElement(By.id("chaptername"))).selectByVisibleText("Tenali Rama Three");
+		new Select(driver.findElement(By.name("category"))).selectByVisibleText("Read");
+		driver.findElement(By.name("submit")).click();
+		Thread.sleep(5000);
+		System.out.println("question set created successfully");
 	}
 
 	@AfterClass(alwaysRun = true)

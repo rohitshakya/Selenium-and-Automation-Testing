@@ -50,10 +50,10 @@ public class ThemeModule {
 		driver.findElement(By.xpath("//form[@id='createcourse']/div/div/div[2]/div[2]/div/button/span")).click();
 		new Select(driver.findElement(By.id("getsubject"))).selectByVisibleText("G.K TEST");
 		driver.findElement(By.xpath("(//button[@type='button'])[4]")).click();
-		new Select(driver.findElement(By.id("setmodule"))).selectByVisibleText("Geography");
+		new Select(driver.findElement(By.id("setmodule"))).selectByVisibleText("ModuleRohit");
 		driver.findElement(By.id("ctitle")).click();
 	    driver.findElement(By.id("ctitle")).clear();
-	    driver.findElement(By.id("ctitle")).sendKeys("Theme1Geography",Keys.TAB,Keys.TAB,Keys.ENTER, "C:\\Users\\editor\\eclipse-workspace\\s2\\src\\moduleImage.jpg");
+	    driver.findElement(By.id("ctitle")).sendKeys("Theme2Geography",Keys.TAB,Keys.TAB,Keys.ENTER, "C:\\Users\\editor\\eclipse-workspace\\s2\\src\\moduleImage.jpg");
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
 		System.out.println("theme created successfully");
 	}

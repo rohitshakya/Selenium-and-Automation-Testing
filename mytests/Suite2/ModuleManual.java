@@ -34,25 +34,25 @@ public class ModuleManual {
 	@Test
 	public void testUntitledTestCase() throws Exception {
 		//LOGIN SCRIPT
-		driver.get("https://volt.development.vivadevops.com/master");
+		driver.get("https://sample.volt.development.vivadevops.com/master");
 		driver.findElement(By.name("email")).click();
 		driver.findElement(By.name("email")).clear();
-		driver.findElement(By.name("email")).sendKeys("rohit.shakya@vivavolt.net");
+		driver.findElement(By.name("email")).sendKeys("volt@vivadigitalindia.net");
 		driver.findElement(By.name("password")).clear();
-		driver.findElement(By.name("password")).sendKeys("Volt@0202");
+		driver.findElement(By.name("password")).sendKeys("Volt@viva02");
 		driver.findElement(By.name("password")).sendKeys(Keys.ENTER);
 		//MAIN SCRIPT START
-		driver.get("https://volt.development.vivadevops.com/master/admin/modulelist");
+		driver.get("https://sample.volt.development.vivadevops.com/master/admin/modulelist");
 		driver.findElement(By.xpath("//li[4]/a/p")).click();
 		driver.findElement(By.xpath("//a/h4")).click();
 		driver.findElement(By.xpath("//form[@id='createcourse']/div/div/div[2]/div/div/button/span")).click();
 		driver.findElement(By.xpath("//form[@id='createcourse']/div/div/div[2]/div/div/div/ul/li[4]/a")).click();
-		new Select(driver.findElement(By.id("changeCls"))).selectByVisibleText("Class 7");
+		new Select(driver.findElement(By.id("changeCls"))).selectByVisibleText("Class 3");
 		driver.findElement(By.xpath("//form[@id='createcourse']/div/div/div[2]/div[2]/div/button/span")).click();
-		new Select(driver.findElement(By.id("getsubject"))).selectByVisibleText("G.K TEST");
+		new Select(driver.findElement(By.id("getsubject"))).selectByVisibleText("G.K");
 		driver.findElement(By.name("mtitle")).click();
 		driver.findElement(By.name("mtitle")).clear();
-		driver.findElement(By.name("mtitle")).sendKeys("TestModuleRohit", Keys.TAB,Keys.TAB,Keys.ENTER); //module name
+		driver.findElement(By.name("mtitle")).sendKeys("America", Keys.TAB,Keys.TAB,Keys.ENTER); //module name
 		driver.findElement(By.name("moduleImage")).click();
 		driver.findElement(By.name("moduleImage")).clear();
 		driver.findElement(By.name("moduleimage")).sendKeys("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\moduleImage.jpg");

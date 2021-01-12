@@ -34,28 +34,28 @@ public class AddQuestionSet {
 	@Test
 	public void testUntitledTestCase() throws Exception {
 		//LOGIN SCRIPT
-		driver.get("https://volt.development.vivadevops.com/master");
+		driver.get("https://sample.volt.development.vivadevops.com/master");
 		driver.findElement(By.name("email")).click();
 		driver.findElement(By.name("email")).clear();
-		driver.findElement(By.name("email")).sendKeys("rohit.shakya@vivavolt.net");
+		driver.findElement(By.name("email")).sendKeys("volt@vivadigitalindia.net");
 		driver.findElement(By.name("password")).clear();
-		driver.findElement(By.name("password")).sendKeys("Volt@0202");
+		driver.findElement(By.name("password")).sendKeys("Volt@viva02");
 		driver.findElement(By.name("password")).sendKeys(Keys.ENTER);
 		//MAIN SCRIPT START
 
-		driver.get("https://volt.development.vivadevops.com/master/question");
+		driver.get("https://sample.volt.development.vivadevops.com/master/question");
 
 		driver.findElement(By.xpath("//li[8]/a/p")).click();
 		driver.findElement(By.xpath("//a/h4")).click();
 
 		driver.findElement(By.name("title")).clear();
-		driver.findElement(By.name("title")).sendKeys("SET NAME ROHIT");
-		new Select(driver.findElement(By.id("classis"))).selectByVisibleText("Class 7");
-		new Select(driver.findElement(By.id("getsubject"))).selectByVisibleText("G.K TEST");
-		new Select(driver.findElement(By.id("setmodule"))).selectByVisibleText("ModuleRohit");
-		new Select(driver.findElement(By.id("setseries"))).selectByVisibleText("Theme2Geography");
+		driver.findElement(By.name("title")).sendKeys("GK Books-3");
+		new Select(driver.findElement(By.id("classis"))).selectByVisibleText("Class 3");
+		new Select(driver.findElement(By.id("getsubject"))).selectByVisibleText("G.K");
+		new Select(driver.findElement(By.id("setmodule"))).selectByVisibleText("TestModuleRohit");
+		new Select(driver.findElement(By.id("setseries"))).selectByVisibleText("Explore2");
 		new Select(driver.findElement(By.name("chapter"))).selectByVisibleText("Chapter 1");
-		new Select(driver.findElement(By.id("chaptername"))).selectByVisibleText("Tenali Rama Three");
+		new Select(driver.findElement(By.id("chaptername"))).selectByVisibleText("A world tour");
 		new Select(driver.findElement(By.name("category"))).selectByVisibleText("Read");
 		driver.findElement(By.name("submit")).click();
 		Thread.sleep(5000);

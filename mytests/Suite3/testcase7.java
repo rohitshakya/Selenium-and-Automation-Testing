@@ -25,7 +25,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class testcase5 {
+public class testcase7 {
 	private WebDriver driver;
 	private boolean acceptNextAlert = true;
 	private StringBuffer verificationErrors = new StringBuffer();
@@ -45,54 +45,6 @@ public class testcase5 {
 	@Test
 	public void ChapterTestCase() throws Exception {
 
-		File file = new File("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\xlsdocs\\addmcq.xlsx"); // creating a new file
-		// instance
-		FileInputStream fis = new FileInputStream(file); // obtaining bytes from the file
-		// creating Workbook instance that refers to .xlsx file
-		XSSFWorkbook wb = new XSSFWorkbook(fis);
-		XSSFSheet sheet = wb.getSheetAt(0); // creating a Sheet object to retrieve object
-		Iterator<Row> itr = sheet.iterator();
-
-		String question = "";
-		boolean answer = false;
-		String questionSetNumber = "";
-
-		// iterating over excel file
-		while (itr.hasNext()) {
-			Row row = itr.next();
-			Iterator<Cell> cellIterator = row.cellIterator(); // iterating over each column
-			while (cellIterator.hasNext()) {
-
-				Cell cell = cellIterator.next();
-
-				switch (cell.getCellType()) {
-				case Cell.CELL_TYPE_STRING: // field that represents string cell type
-					String mycell = cell.getStringCellValue();
-					if (cell.getColumnIndex() == 0 && cell.getRowIndex() == 1) {
-						question = mycell;
-						System.out.println(question);
-					}  if (cell.getColumnIndex() == 2 && cell.getRowIndex() == 1) {
-						questionSetNumber= mycell;
-
-						//System.out.println(questionSetNumber);
-					}
-					break;
-				case Cell.CELL_TYPE_NUMERIC: // field that represents number cell type
-					//System.out.print(cell.getNumericCellValue() + "\t\t\t");
-					break;
-				case Cell.CELL_TYPE_BOOLEAN: // field that represents number cell type
-					//System.out.print(cell.getBooleanCellValue() + "\t\t\t");
-					if (cell.getColumnIndex() == 1 && cell.getRowIndex() == 1) {
-						answer=cell.getBooleanCellValue();
-					} 
-
-					break;
-				default:
-				}
-			}
-			//System.out.println("");
-		}
-
 		//LOGIN SCRIPT
 		driver.get("https://sample.volt.development.vivadevops.com/master");
 		driver.findElement(By.name("email")).click();
@@ -102,23 +54,35 @@ public class testcase5 {
 		driver.findElement(By.name("password")).sendKeys("Volt@viva02");
 		driver.findElement(By.name("password")).sendKeys(Keys.ENTER);
 		//MAIN SCRIPT START
-
 		driver.get("https://sample.volt.development.vivadevops.com/master/questionlist/create/171");
-		driver.findElement(By.id("tnf")).click();
-		driver.findElement(By.xpath("//p")).click();
-		driver.findElement(By.id("cke_203_label")).click();
-		if(answer==true)
-		{
-			driver.findElement(By.xpath("(//input[@name='mcqval'])[5]")).click(); //true click
-		}
-		else if(answer==false)
-		{
-			driver.findElement(By.xpath("(//input[@name='mcqval'])[6]")).click(); //false click
-
-		}
-		driver.findElement(By.xpath("//div[@id='cke_3_contents']/textarea")).click();
-		driver.findElement(By.xpath("//div[@id='cke_3_contents']/textarea")).clear();
-		driver.findElement(By.xpath("//div[@id='cke_3_contents']/textarea")).sendKeys("<p>"+question+"</p>",Keys.TAB,Keys.TAB,Keys.TAB,Keys.TAB,Keys.ENTER);
+	    driver.findElement(By.id("fib")).click();
+	    driver.findElement(By.xpath("(//input[@name='mcqval1'])[3]")).click();
+	    driver.findElement(By.xpath("//p")).click();
+	    driver.findElement(By.id("cke_122_label")).click();
+	    driver.findElement(By.xpath("//div[@id='cke_1_contents']/textarea")).click();
+	    driver.findElement(By.xpath("//div[@id='cke_1_contents']/textarea")).clear();
+	    driver.findElement(By.xpath("//div[@id='cke_1_contents']/textarea")).sendKeys("A");
+	    driver.findElement(By.id("cke_163_label")).click(); 
+	    driver.findElement(By.xpath("//div[@id='cke_2_contents']/textarea")).click();
+	    driver.findElement(By.xpath("//div[@id='cke_2_contents']/textarea")).clear();
+	    driver.findElement(By.xpath("//div[@id='cke_2_contents']/textarea")).sendKeys("changes its colour to blend with its surroundings.");
+	    driver.findElement(By.id("cke_1043_label")).click();
+	    driver.findElement(By.xpath("//div[@id='cke_24_contents']/textarea")).click();
+	    driver.findElement(By.xpath("//div[@id='cke_24_contents']/textarea")).clear();
+	    driver.findElement(By.xpath("//div[@id='cke_24_contents']/textarea")).sendKeys("chameleon");
+	    driver.findElement(By.id("cke_1083_label")).click();
+	    driver.findElement(By.xpath("//div[@id='cke_25_contents']/textarea")).click();
+	    driver.findElement(By.xpath("//div[@id='cke_25_contents']/textarea")).clear();
+	    driver.findElement(By.xpath("//div[@id='cke_25_contents']/textarea")).sendKeys("mole");
+	    driver.findElement(By.id("cke_1123_label")).click();
+	    driver.findElement(By.xpath("//div[@id='cke_26_contents']/textarea")).click();
+	    driver.findElement(By.xpath("//div[@id='cke_26_contents']/textarea")).clear();
+	    driver.findElement(By.xpath("//div[@id='cke_26_contents']/textarea")).sendKeys("porcupine");
+	    driver.findElement(By.id("cke_1163_label")).click();
+	    driver.findElement(By.xpath("//div[@id='cke_27_contents']/textarea")).click();
+	    driver.findElement(By.xpath("//div[@id='cke_27_contents']/textarea")).clear();
+	    driver.findElement(By.xpath("//div[@id='cke_27_contents']/textarea")).sendKeys("snake");
+	    driver.findElement(By.name("submit")).click();
 		driver.close();
 	}
 

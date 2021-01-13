@@ -1,4 +1,4 @@
-package viva;
+package DefaultSuite;
 import java.awt.Desktop;
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;

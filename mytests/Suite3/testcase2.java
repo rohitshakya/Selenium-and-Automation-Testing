@@ -1,3 +1,5 @@
+
+//theme maker
 package Suite3;
 
 import static org.testng.Assert.fail;
@@ -44,7 +46,7 @@ public class testcase2 {
 	@Test(priority=2)
 	public void ThemeTestCase() throws Exception {
 
-		File file = new File("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\module.xlsx"); // creating a new file
+		File file = new File("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\xlsdocs\\module.xlsx"); // creating a new file
 		// instance
 		FileInputStream fis = new FileInputStream(file); // obtaining bytes from the file
 		// creating Workbook instance that refers to .xlsx file

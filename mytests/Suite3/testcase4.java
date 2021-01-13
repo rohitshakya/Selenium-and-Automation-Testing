@@ -1,3 +1,4 @@
+//question set generator
 package Suite3;
 
 import static org.testng.Assert.fail;
@@ -44,7 +45,7 @@ public class testcase4 {
 	@Test
 	public void ChapterTestCase() throws Exception {
 
-		File file = new File("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\questionset.xlsx"); // creating a new file
+		File file = new File("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\xlsdocs\\questionset.xlsx"); // creating a new file
 		// instance
 		FileInputStream fis = new FileInputStream(file); // obtaining bytes from the file
 		// creating Workbook instance that refers to .xlsx file
@@ -135,7 +136,7 @@ public class testcase4 {
 		new Select(driver.findElement(By.name("category"))).selectByVisibleText(activityType);
 		driver.findElement(By.name("submit")).click();
 		System.out.println("question set created successfully");
-
+		driver.close();
 
 	}
 

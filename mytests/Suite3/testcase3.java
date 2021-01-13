@@ -1,3 +1,4 @@
+//chapter maker
 package Suite3;
 
 import static org.testng.Assert.fail;
@@ -44,7 +45,7 @@ public class testcase3 {
 	@Test
 	public void ChapterTestCase() throws Exception {
 
-		File file = new File("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\module.xlsx"); // creating a new file
+		File file = new File("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\xlsdocs\\module.xlsx"); // creating a new file
 		// instance
 		FileInputStream fis = new FileInputStream(file); // obtaining bytes from the file
 		// creating Workbook instance that refers to .xlsx file
@@ -128,8 +129,8 @@ public class testcase3 {
 		driver.findElement(By.name("coursedetail")).click();
 		driver.findElement(By.name("coursedetail")).clear();
 		driver.findElement(By.name("coursedetail")).sendKeys(chapterDescription,Keys.TAB,Keys.TAB,Keys.ENTER); //chapter description
-		Thread.sleep(5000);
 		System.out.println("chapter created successfully");
+		driver.close();
 
 
 	}

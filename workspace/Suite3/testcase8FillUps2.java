@@ -50,7 +50,7 @@ public class testcase8FillUps2 {
 		driver.findElement(By.name("password")).sendKeys("Volt@viva02");
 		driver.findElement(By.name("password")).sendKeys(Keys.ENTER);
 
-		File file = new File("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\xlsdocs\\Fillups.xlsx"); // creating a new file
+		File file = new File("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\xlsdocs\\addFillups.xlsx"); // creating a new file
 		// instance
 		FileInputStream fis = new FileInputStream(file); // obtaining bytes from the file
 		// creating Workbook instance that refers to .xlsx file

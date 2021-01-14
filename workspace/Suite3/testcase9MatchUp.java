@@ -21,7 +21,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class testcase6TrueFalse2 {
+public class testcase9MatchUp {
 	private WebDriver driver;
 	private StringBuffer verificationErrors = new StringBuffer();
 
@@ -40,7 +40,51 @@ public class testcase6TrueFalse2 {
 	@Test
 	public void ChapterTestCase() throws Exception {
 
+		File file = new File("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\xlsdocs\\addMatchUp.xlsx"); // creating a new file1
+		// instance
+		FileInputStream fis = new FileInputStream(file); // obtaining bytes from the file
+		// creating Workbook instance that refers to .xlsx file
+		XSSFWorkbook wb = new XSSFWorkbook(fis);
+		XSSFSheet sheet = wb.getSheetAt(0); // creating a Sheet object to retrieve object
+		Iterator<Row> itr = sheet.iterator();
+		int rowTotal = sheet.getPhysicalNumberOfRows();
+		System.out.println(rowTotal);
+		int rowLimit=7;
+		int rowCheck=0;
+		String[] sideA = new String[7];
+		String[] sideB = new String[7];
+		// iterating over excel file
+		while (itr.hasNext()) {
 
+			if(rowCheck>rowLimit) { break; }
+
+			Row row = itr.next();
+			int rowInit = 0;
+			Iterator<Cell> cellIterator = row.cellIterator(); // iterating over each column
+			while (cellIterator.hasNext()) {
+				Cell cell = cellIterator.next();
+				rowInit=cell.getRowIndex();
+				if(rowInit<1) continue;
+				if (cell.getColumnIndex() == 4 && cell.getRowIndex() == rowInit) {
+					switch (cell.getCellType()) {
+					case Cell.CELL_TYPE_STRING: // field that represents string cell type
+						sideA[rowInit-1]=cell.getStringCellValue();
+						break;
+					default:
+						break;
+					}
+				}
+				else if (cell.getColumnIndex() == 5 && cell.getRowIndex()==rowInit) {
+					switch (cell.getCellType()) {
+					case Cell.CELL_TYPE_STRING: // field that represents string cell type
+						sideB[rowInit-1]=cell.getStringCellValue();
+						break;
+					default:
+						break;
+					}
+				}
+			}
+		}	
 		//LOGIN SCRIPT
 		driver.get("https://sample.volt.development.vivadevops.com/master");
 		driver.findElement(By.name("email")).click();
@@ -50,82 +94,20 @@ public class testcase6TrueFalse2 {
 		driver.findElement(By.name("password")).sendKeys("Volt@viva02");
 		driver.findElement(By.name("password")).sendKeys(Keys.ENTER);
 
-		File file = new File("C:\\Users\\editor\\eclipse-workspace\\s2\\src\\xlsdocs\\addmcq.xlsx"); // creating a new file
-		// instance
-		FileInputStream fis = new FileInputStream(file); // obtaining bytes from the file
-		// creating Workbook instance that refers to .xlsx file
-		XSSFWorkbook wb = new XSSFWorkbook(fis);
-		XSSFSheet sheet = wb.getSheetAt(0); // creating a Sheet object to retrieve object
-		Iterator<Row> itr = sheet.iterator();
-		int rowTotal = sheet.getPhysicalNumberOfRows();
-		System.out.println(rowTotal);
-		String question = "";
-		boolean answer = false;
-		int rowLimit=7;
-		int rowCheck=0;
-		// iterating over excel file
-		while (itr.hasNext()) {
-			if(rowCheck>rowLimit)
-			{
-				break;
-			}
-			Row row = itr.next();
-			int rowInit = 0;
-			Iterator<Cell> cellIterator = row.cellIterator(); // iterating over each column
-			while (cellIterator.hasNext()) {
-				Cell cell = cellIterator.next();
-				rowInit=cell.getRowIndex();
-				if(rowInit<1) continue;
-				if (cell.getColumnIndex() == 0 && cell.getRowIndex() > 0) {
-					switch (cell.getCellType()) {
-					case Cell.CELL_TYPE_STRING: // field that represents string cell type
-						question = cell.getStringCellValue();
-						break;
-					default:
-						break;
-					}
-				}
-				else if (cell.getColumnIndex() == 2 && cell.getRowIndex() == 1) {
-					switch (cell.getCellType()) {
-					case Cell.CELL_TYPE_STRING: // field that represents string cell type
-						cell.getNumericCellValue();
-						break;
-					default:
-						break;
-					}
-				}
-				else if (cell.getColumnIndex() == 1 && cell.getRowIndex() == 1) {
-					switch (cell.getCellType()) {
-					case Cell.CELL_TYPE_STRING: // field that represents string cell type
-						answer=cell.getBooleanCellValue();
-						break;
-					default:
-						break;
-					}
-				}
-			}
-			if(rowInit<1) continue;
-			driver.get("https://sample.volt.development.vivadevops.com/master/questionlist/create/171");
-			driver.findElement(By.id("tnf")).click();
-			driver.findElement(By.xpath("//p")).click();
-			driver.findElement(By.id("cke_203_label")).click();
-			//can't use switch the boolean variable
-			if(answer==true)
-			{
-				driver.findElement(By.xpath("(//input[@name='mcqval'])[5]")).click(); //true click
-			}
-			else if(answer==false)
-			{
-				driver.findElement(By.xpath("(//input[@name='mcqval'])[6]")).click(); //false click
+		//main script for iteration
+		driver.get("https://sample.volt.development.vivadevops.com/master/questionlist/create/171");
+		driver.findElement(By.id("mch")).click();
 
-			}
-			driver.findElement(By.xpath("//div[@id='cke_3_contents']/textarea")).click();
-			driver.findElement(By.xpath("//div[@id='cke_3_contents']/textarea")).clear();
-			driver.findElement(By.xpath("//div[@id='cke_3_contents']/textarea")).sendKeys("<p>"+question+"</p>",Keys.TAB,Keys.TAB,Keys.TAB,Keys.TAB,Keys.ENTER);
-			System.out.println(++rowCheck);
+	    driver.findElement(By.id("cke_203_label")).click();
+		driver.findElement(By.xpath("//div[@id='cke_3_contents']/textarea")).click();
+		driver.findElement(By.xpath("//div[@id='cke_3_contents']/textarea")).clear();
+		driver.findElement(By.xpath("//div[@id='cke_3_contents']/textarea"))
+		.sendKeys("Match The Following",Keys.TAB,sideA[0],Keys.TAB,sideB[0],Keys.TAB,sideA[1],Keys.TAB,sideB[1],
+				Keys.TAB,sideA[2],Keys.TAB,sideB[2],Keys.TAB,sideA[3],Keys.TAB,sideB[3],Keys.TAB,sideA[4],
+				Keys.TAB,sideB[4],Keys.TAB,sideA[5],Keys.TAB,sideB[5],Keys.TAB,sideA[6],Keys.TAB,sideB[6],Keys.TAB,Keys.ENTER);
 
-			//System.out.println("");
-		}
+		//System.out.println("");
+
 		driver.close();
 	}
 

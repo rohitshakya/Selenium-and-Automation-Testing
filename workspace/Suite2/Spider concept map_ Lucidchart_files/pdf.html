@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)https://printing.lucid.app/pdf.html?20210115185018 -->
+<html><script src="chrome-extension://ljdobmomdgdljniojadhoplhkpialdid/page/prompt.js"></script><script src="chrome-extension://ljdobmomdgdljniojadhoplhkpialdid/page/runScript.js"></script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>PDF Printer</title>
+        <script src="./jquery.min.js.download"></script>
+        <script type="text/javascript">
+            function download(src){
+            $('iframe').remove();
+            $.ajax({
+                type: 'GET',
+                url: src,
+                error: function (xhr, ajaxOptions, thrownError) {
+                    window.parent.postMessage('error', '*');
+                },
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+                    //Download progress
+                    xhr.addEventListener("progress", function (evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = evt.loaded / evt.total;
+                            window.parent.postMessage("Printing: " + Math.round(percentComplete*100) + "%", '*');
+                            // progressElem.html(Math.round(percentComplete * 100) + "%");
+                        } else {
+                        }
+                    }, false);
+                    return xhr;
+                },
+                success: function () {
+                    window.parent.postMessage('done', '*');
+                    $('<iframe type="application/pdf"></iframe>').attr('src', src).appendTo(document.body).load(function() {
+                        setTimeout(function() {
+                            this.contentWindow.print();
+                        }.bind(this), 0);
+                    });
+                }
+            });
+        }
+
+        $(document).ready(function(){
+            window.addEventListener("message", function(e){
+                if (e.data.indexOf('/') == 0) {
+                    src = location.origin + e.data;
+                    download(src)
+                }
+            }, false);
+        });
+        </script>
+    <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script></head>
+    <body data-new-gr-c-s-check-loaded="14.991.0" data-gr-ext-installed="">
+
+<iframe type="application/pdf" src="./62d32885-7ad5-4568-9030-610bfd2c5c71.html"></iframe></body></html>

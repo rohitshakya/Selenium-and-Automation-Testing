@@ -58,7 +58,6 @@ public class testcase11Ebook {
 		Iterator<Row> itr = sheet.iterator();
 		int rowTotal = sheet.getPhysicalNumberOfRows();
 		System.out.println(rowTotal);
-		String questionDesc = "";
 		String ebookUrl="";
 		int rowLimit=2;
 		int rowInit=0;
@@ -74,7 +73,7 @@ public class testcase11Ebook {
 				if (cell.getColumnIndex() == 4 && cell.getRowIndex() > 0) {
 					switch (cell.getCellType()) {
 					case Cell.CELL_TYPE_STRING: // field that represents string cell type
-						questionDesc = cell.getStringCellValue();
+						cell.getStringCellValue();
 						break;
 					default:
 						break;

@@ -1,0 +1,123 @@
+Performance Testing:
+*Time unit: ms
+
+*Response code:200 (Success)
+*Response code:504 (Gateway time out)
+
+*Throughput:Throughput is one of the key metrics in performance testing. It's used to check how many requests a software will be able to process per second, per minute or hour. As a rule, every test plan has a throughput goal
+
+*Standard deviation: It is the measure of how response time is spread out around the mean. It is denoted by Sigma (σ). Standard Deviation tells whether a transaction is consistent throughout the test or not. ... So smaller the value more close the transaction response times are and more consistent the transaction is.
+
+*Latency: Latency is a measure of how fast a server responds to requests from the client. Typically measured in milliseconds (ms), latency is often referred to as response time. Lower numbers indicate faster responses.(first byte received from server)
+
+Case 1: 500 Users : Ramp up time 10 seconds (It will take 10 seconds to execute 500 users, ie 50 users per second)
+Sample result for single user:
+Thread Name:Users (Iteration)1-(User no.)108
+Sample Start:2021-04-12 15:30:30 IST
+Load time:7947 ms
+Connect Time:0
+Latency:6131
+Size in bytes:70676
+Sent bytes:116
+Headers size in bytes:906
+Body size in bytes:69770
+Sample Count:1
+Error Count:0
+Data type ("text"|"bin"|""):text
+Response code:200
+Response message:OK
+
+
+HTTPSampleResult fields:
+ContentType: text/html; charset=UTF-8
+DataEncoding: UTF-8
+
+Overall report for case 1:
+Label			# Samples	Average	Min	Max		Std. Dev.	Error %	Throughput	Received KB/sec	Sent KB/sec	Avg. Bytes
+HTTP Request	1205		8724	908	129473	8056.85		0.17%	8.97954		618.75			1.02		70560.4
+TOTAL			1205		8724	908	129473	8056.85		0.17%	8.97954		618.75			1.02		70560.4
+Report Status:200
+
+Case 2: 600 Users : Ramp up time 10 seconds (It will take 10 seconds to execute 600 users, ie 60 users per second)
+Thread Name:Users 1-244
+Sample Start:2021-04-12 15:55:49 IST
+Load time:60042
+Connect Time:0
+Latency:60042
+Size in bytes:703
+Sent bytes:116
+Headers size in bytes:571
+Body size in bytes:132
+Sample Count:1
+Error Count:1
+Data type ("text"|"bin"|""):text
+Response code:504
+Response message:Gateway Time-out
+
+
+HTTPSampleResult fields:
+ContentType: text/html
+DataEncoding: null
+
+
+Label			# Samples	Average	Min		Max			Std. Dev.	Error %		Throughput	Received KB/sec	Sent KB/sec		Avg. Bytes
+HTTP Request	1008		3969	33		81947		13339.75	100.00%		10.32946	7.47			1.17				740.3
+TOTAL			1008		3969	33		81947		13339.75	100.00%		10.32946	7.47			1.17				740.3
+
+Report Status:504 Gateway time out
+
+Case 3: Load testing after login: 200 Users : Ramp up time 10 seconds (It will take 10 seconds to execute 100 users, ie 10 users per second)
+
+Thread Name:Thread Group 1-2
+Sample Start:2021-04-12 16:39:01 IST
+Load time:527
+Connect Time:412
+Latency:527
+Size in bytes:948
+Sent bytes:494
+Headers size in bytes:879
+Body size in bytes:69
+Sample Count:1
+Error Count:0
+Data type ("text"|"bin"|""):text
+Response code:200
+Response message:OK
+
+
+HTTPSampleResult fields:
+ContentType: text/html; charset=UTF-8
+DataEncoding: UTF-8
+
+Thread Name:Thread Group 1-36
+Sample Start:2021-04-12 17:05:03 IST
+Load time:5906
+Connect Time:0
+Latency:146
+Size in bytes:2516255
+Sent bytes:48587
+Headers size in bytes:39742
+Body size in bytes:2476513
+Sample Count:1
+Error Count:1
+Data type ("text"|"bin"|""):text
+Response code:200
+Response message:Embedded resource download error:https://master.vivavolt.in/uploads/chapterbanner/chapter_1614756174_94566dced8503434ae54.png code:Non HTTP response code: java.net.SocketException message:Non HTTP response message: Socket operation on nonsocket: connect, 
+
+
+HTTPSampleResult fields:
+ContentType: text/html; charset=UTF-8
+DataEncoding: UTF-8
+
+
+Label								# Samples	Average	Min	Max	Std. Dev.	Error %	Throughput	Received KB/sec	Sent KB/sec	Avg. Bytes
+https://vivavolt.in/loginckeck		200	6721	130		60178	15474.01	25.00%	1.35504		1.3	0.65	985.3			1906650
+https://vivavolt.in/				200	10197	30		126836	20784.39	45.50%	1.05045		1955.92		37.67			1906660
+Test								200	16919	1925	127154	25558.91	45.50%	1.04899		1954.2		38.12			1907645.3
+TOTAL								600	11279	30		127154	21435.53	38.67%	3.14696		3908.39		76.24			1271763.5
+
+Case 4: Play any activity or play any video scenario:50 Users : Ramp up time 10 seconds (It will take 10 seconds to execute 50 users, ie 5 users per second)
+Label			# Samples	Average	Min	Max	Std. Dev.				Error %	Throughput			Received KB/sec		Sent KB/sec			Avg. Bytes
+HTTP Request	100			8935	555	60152	20659.624415753544	0.14	0.85647236163689	39.855799160978265	0.1388421992497302	47651.67
+TOTAL			100			8935	555	60152	20659.624415753544	0.14	0.85647236163689	39.855799160978265	0.1388421992497302	47651.67
+
+Report status: 14% errors for gateway time out

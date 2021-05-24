@@ -104,18 +104,23 @@
                   <stringProp name="Argument.name">accountid</stringProp>
                   <stringProp name="Argument.value">a0005</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+
                 </elementProp>
                 <elementProp name="currenturl" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">true</boolProp>
                   <stringProp name="Argument.name">currenturl</stringProp>
                   <stringProp name="Argument.value">/</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="accountpassword" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">true</boolProp>
                   <stringProp name="Argument.name">accountpassword</stringProp>
                   <stringProp name="Argument.value">Shakyarohi123#</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
